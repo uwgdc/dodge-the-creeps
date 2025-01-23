@@ -1,8 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://bfty6551sm2qx"]
+[gd_scene load_steps=7 format=4 uid="uid://bfty6551sm2qx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_hq2xi"]
-[ext_resource type="PackedScene" uid="uid://iqmyuq0y07cu" path="res://mob/mob.tscn" id="2_dk5o6"]
-[ext_resource type="PackedScene" uid="uid://4b4iok6y6g73" path="res://player/player.tscn" id="3_bwb17"]
 [ext_resource type="PackedScene" uid="uid://bbxhdqskyphfv" path="res://hud.tscn" id="4_34ay3"]
 [ext_resource type="AudioStream" uid="uid://ccdvbfq2pnrwe" path="res://assets/art/gameover.wav" id="5_nalq3"]
 
@@ -23,7 +21,6 @@ loop = true
 
 [node name="Main" type="Node"]
 script = ExtResource("1_hq2xi")
-mob_scene = ExtResource("2_dk5o6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -32,20 +29,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.567333, 0.41, 1)
-
-[node name="Player" parent="." instance=ExtResource("3_bwb17")]
-
-[node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="ScoreTimer" type="Timer" parent="."]
-
-[node name="StartTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(272, 448)
 
 [node name="MobPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_2rbv2")
@@ -62,8 +45,4 @@ stream = SubResource("AudioStreamOggVorbis_lja2q")
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_nalq3")
 
-[connection signal="hit" from="Player" to="." method="game_over"]
-[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
-[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
-[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="start_game" from="HUD" to="." method="new_game"]
