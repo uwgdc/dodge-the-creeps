@@ -7,10 +7,6 @@ func _ready() -> void:
 	$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
+# deletes mob when they leave the screen
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
